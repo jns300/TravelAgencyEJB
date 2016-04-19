@@ -87,7 +87,6 @@ public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 						getMaxDurationValue(), getMinPriceValue(), getMaxPriceValue(),
 						getCountryValue(), getDepartureStartDate(), getDepartureEndDate(),
 						showExpired);
-				logger.info("Offer count: " + allOfferCount);
 			} catch (Exception ex) {
 				logger.log(Level.SEVERE, ex.getMessage());
 			}

@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -65,6 +67,7 @@ public class RequestBean implements RequestBeanRemote {
 	}
 
 	@PostConstruct
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	private void init() {
 		cb = em.getCriteriaBuilder();
 	}

@@ -64,15 +64,15 @@ h1.contentTitle {
 .clearfix {
     *zoom: 1; /* For IE 6/7 only */
 }
+.menuContent table {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
 .menuContent {
 	margin-top: 15px;
 	width: 20%;
 	float: left;
-}
-
-.menuContent table {
-	padding-top: 12px;
-	padding-bottom: 12px;
 }
 
 .mainContent {
@@ -83,7 +83,7 @@ h1.contentTitle {
 
 .contentPanel {
 	padding-top: 5px;
-	padding-bottom: 15px;
+	padding-bottom: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -105,7 +105,7 @@ h1.contentTitle {
 }
 .offerGridPanel {
 	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 .bottomContent {
 	margin: 1px;
@@ -132,3 +132,12 @@ h1.contentTitle {
 .offerTable {
 	border:solid 1px
 }
+/* Tablets (portrait) | <800px */	
+@media only screen and (max-width: 50em) {
+	.headerText {
+		font-size: 2.3em;
+	}
+	.menuContent, .mainContent {
+		float: none;
+		width: 100%;
+	}

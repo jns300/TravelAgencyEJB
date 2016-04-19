@@ -11,6 +11,10 @@
 	<packaging>ejb</packaging>
 
 	<name>travel-ejb</name>
+	<properties>
+		<eclipselink.version>2.5.2</eclipselink.version>
+	</properties>
+
 
 	<dependencies>
 		<dependency>
@@ -31,6 +35,13 @@
 			<artifactId>arquillian-junit-container</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+            <version>${eclipselink.version}</version>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

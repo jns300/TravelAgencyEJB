@@ -96,7 +96,7 @@ public abstract class AbstractOffersBean<T, TA> implements Serializable {
 
 	public String showDetails(T offer) {
 		if (offer instanceof Integer) {
-			return showDetails((int) offer);
+			return showDetails((Integer) offer);
 		}
 		current = offer;
 		return getOfferDetailsPage();

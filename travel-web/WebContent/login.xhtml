@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="content">
+			<h:panelGroup>
+				<h2>#{bundle.Login_title}</h2>
+				<h:outputText rendered="#{loginForm.signUpDone}"
+					value="The user thes been registered successfully."></h:outputText>
+				<h:panelGrid columns="2" columnClasses="titleColumn,dataColumn">
+					<h:outputText for="login" value="#{bundle.Login_login}:" />
+					<h:inputText id="login" value="#{loginForm.login}"
+						binding="#{loginForm.loginInputText}" />
+					<h:outputText for="password" value="#{bundle.Login_password}:" />
+					<h:inputSecret id="password" value="#{loginForm.password}" />
+				</h:panelGrid>
+				<h:panelGroup layout="block" styleClass="bottomContent">
+					<h:commandButton styleClass="buttonElement" value="Sign in"
+						action="#{loginForm.signIn}"></h:commandButton>
+					<h:link value="Sign up" outcome="signUp"></h:link>
+					<h:panelGroup layout="block" styleClass="message">
+						<h:messages id="messages" globalOnly="false" />
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+	</ui:define>
+</ui:composition>
+
+</html>

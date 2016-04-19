@@ -1,0 +1,5 @@
+File travelDb_backup.sql contains a backuped database with predefined accounts. In order to log to the system, using these accounts, the following login/password pairs should be specified:
+ - For client-user, login: 'jsmith@cyberia.eu', password: 'fishAndCat'
+ - For administrator, login: 'jsmithAdmin@cyberia.eu', password: 'fishAndCat'
+ 
+File travelTestDb_backup.sql contains backauped database utilized in tests.

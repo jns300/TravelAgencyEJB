@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="content">
+		<h:panelGroup layout="block">
+			<h3>#{bundle.Offers_listTitle}</h3>
+			<h:messages styleClass="messages" />
+			<h:panelGroup>
+				<h:panelGrid columns="4"
+					columnClasses="nameColumn,valueColumn,nameColumn,valueColumn">
+					<h:outputLabel for="departureStartDate"
+						value="Departure start date  (yyyy-MM-dd): "></h:outputLabel>
+					<h:inputText id="departureStartDate" label="Departure start date"
+						value="#{offerslist.departureStartDate}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:inputText>
+					<h:outputLabel for="departureEndDate"
+						value="Departure end date (yyyy-MM-dd): "></h:outputLabel>
+					<h:inputText id="departureEndDate" label="Departure end date"
+						value="#{offerslist.departureEndDate}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:inputText>
+
+					<h:outputLabel for="minDaysText" value="Min duration (days): "></h:outputLabel>
+					<h:inputText id="minDaysText" label="Min duration"
+						value="#{offerslist.minDurationValue}">
+						<f:convertNumber integerOnly="true" />
+					</h:inputText>
+					<h:outputLabel for="maxnDaysText" value="Max duration (days): "></h:outputLabel>
+					<h:inputText id="maxnDaysText" label="Max duration"
+						value="#{offerslist.maxDurationValue}">
+						<f:convertNumber integerOnly="true" />
+					</h:inputText>
+
+					<h:outputLabel for="minPriceText" value="Min price: "></h:outputLabel>
+					<h:inputText id="minPriceText" label="Min price"
+						value="#{offerslist.minPriceValue}">
+					</h:inputText>
+					<h:outputLabel for="maxPriceText" value="Max price: "></h:outputLabel>
+					<h:inputText id="maxPriceText" label="Max price"
+						value="#{offerslist.maxPriceValue}">
+					</h:inputText>
+
+					<h:outputLabel for="countryText" value="Departure country: "></h:outputLabel>
+					<h:inputText id="countryText" label="Departure country"
+						value="#{offerslist.countryValue}"></h:inputText>
+				</h:panelGrid>
+				<br />
+				<h:panelGrid columns="1">
+					<h:panelGroup layout="block">
+						<h:outputLabel for="itemsOnPage"
+							value="Number of items on the page: "></h:outputLabel>
+						<h:inputText id="itemsOnPage" label="Number of items on the page"
+							value="#{offerslist.pageSize}"></h:inputText>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{loginForm.superUser}">
+						<h:outputLabel for="showExpired"
+							value="Show only expired offers: "></h:outputLabel>
+						<h:selectBooleanCheckbox id="showExpired"
+							value="#{offerslist.showExpired}"></h:selectBooleanCheckbox>
+					</h:panelGroup>
+				</h:panelGrid>
+				<h:commandButton styleClass="buttonElement" id="showButton"
+					value="Reload" action="offers"></h:commandButton>
+				<h:commandButton styleClass="buttonElement" id="resetButton"
+					value="Reset" action="#{offerslist.reset}" immediate="true"></h:commandButton>
+			</h:panelGroup>
+			<ui:include src="offerGrid.xhtml">
+				<ui:param name="history" value="false" />
+				<ui:param name="offerBean" value="#{offerslist}" />
+			</ui:include>
+		</h:panelGroup>
+
+	</ui:define>
+</ui:composition>
+
+</html>

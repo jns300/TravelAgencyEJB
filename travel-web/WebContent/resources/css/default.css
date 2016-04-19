@@ -1,0 +1,134 @@
+body {
+	max-width: 750pt;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.headerDiv {
+	border-style:solid; 
+	border-color: rgb(110, 139, 255); 
+	border-width:1px; 
+	border-radius:5px;
+	width:100%;
+	box-shadow:5pt 5pt 12pt #777777;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+a {
+	color: rgb(110, 139, 255);
+}
+.headerText {
+	text-align: center; 
+	color: rgb(110, 139, 255); 
+	font-size: 44pt; 
+	text-shadow: 6px 6px 12px #444444;
+}
+#mainDiv {
+	margin: 5px;
+}
+h1.contentTitle {
+	color:red; 
+	font-size: 30pt;
+	margin-left: auto;
+    margin-right: auto;
+}
+	
+.mainButton {
+	margin-left: 12pt;
+	margin-right: 12pt;
+}
+.titleColumn {
+	background-color: #A1A1A1;
+	font-weight:  bold;
+	border-style: none;
+	border-width: 0px;
+}
+.dataColumn {
+	border-style: dotted;
+	border-width: 0px;
+}
+
+.loggedSection {
+	padding-left: 8px;
+	padding-top: 20px;
+}
+/* Clearing Floats */
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+    *zoom: 1; /* For IE 6/7 only */
+}
+.menuContent {
+	margin-top: 15px;
+	width: 20%;
+	float: left;
+}
+
+.menuContent table {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+.mainContent {
+	margin-top: 15px;
+	width: 76%;
+	float: right;
+}
+
+.contentPanel {
+	padding-top: 5px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.menuPanel {
+	width: 190px;
+	background-color:white;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+.contentFrame {
+	border-radius:5px; 
+	border: 1px solid rgb(110, 139, 255);
+	box-shadow:5pt 5pt 12pt #777777;
+}
+
+.reserved {
+	background-color: rgb(130, 179, 255);
+}
+.offerGridPanel {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.bottomContent {
+	margin: 1px;
+	margin-top: 10px;
+}
+.bottomCloseContent {
+	margin: 1px;
+	margin-top: 3px;
+}
+.buttonElement {
+	margin-right: 5px;
+}
+
+.message {
+	color: #d20005; 
+	font-size: 14px;	
+}
+.messages {
+	color: #d20005;
+}
+.indexBlock {
+	margin: 20pt;
+}
+.offerTable {
+	border:solid 1px
+}

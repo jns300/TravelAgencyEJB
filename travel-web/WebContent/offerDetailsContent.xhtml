@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:panelGroup layout="block" rendered="#{offerBean.current == null}">
+	<h:panelGroup layout="block">Offer to display was not selected.</h:panelGroup>
+</h:panelGroup>
+<h:panelGrid columns="2" columnClasses="titleColumn,dataColumn"
+	rendered="#{offerBean.current != null}">
+	<h:outputText value="#{bundle.Offers_date}:" />
+	<h:outputText value="#{offerBean.current.dataWyjazdu}">
+		<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+	</h:outputText>
+	<h:outputText value="#{bundle.Offers_city}:" />
+	<h:outputText value="#{offerBean.current.miasto}" />
+	<h:outputText value="#{bundle.Offers_country}:" />
+	<h:outputText value="#{offerBean.current.tpanstwa.nazwaPanstwa}" />
+	<h:outputText value="#{bundle.Offers_departurePlace}:" />
+	<h:outputText value="#{offerBean.current.miejsceWyjazdu}" />
+	<h:outputText value="#{bundle.Offers_dayCount}:" />
+	<h:outputText value="#{offerBean.current.liczbaDniTrwania}" />
+	<h:outputText value="#{bundle.Offers_personCount}:" />
+	<h:outputText value="#{offerBean.current.ILiczbaOsob}" />
+	<h:outputText value="#{bundle.Offers_reservedCount}:" />
+	<h:outputText value="#{offerBean.getOfferClientCount()}" />
+	<h:outputText value="#{bundle.Offers_price}:" />
+	<h:outputText value="#{offerBean.current.MCena}">
+		<f:convertNumber type="currency" />
+	</h:outputText>
+	<h:outputText value="#{bundle.Offers_desc}:" />
+	<h:outputText value="#{offerBean.current.opis}" />
+</h:panelGrid>
+<h:panelGroup rendered="#{offerBean.attractions.size() > 0}">
+	<h3>Attractions related to the offer</h3>
+	<h:dataTable var="item" rules="all" value="#{offerBean.attractions}"
+		class="attractionTable">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Attraction_name}" />
+			</f:facet>
+			<h:outputText value="#{item.nazwa}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Attraction_price}" />
+			</f:facet>
+			<h:outputText value="#{item.MCena}">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Attraction_personCount}" />
+			</f:facet>
+			<h:outputText value="#{item.ILiczbaOsob}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Attraction_reservedCount}" />
+			</f:facet>
+			<h:outputText value="#{offerBean.getAttractionClientCount(item)}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Attraction_desc}" />
+			</f:facet>
+			<h:outputText value="#{item.opis}" />
+		</h:column>
+		<h:column rendered="#{loginForm.loggedOn}">
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Attraction_reserve}" />
+			</f:facet>
+			<h:panelGroup rendered="#{offerBean.history}">
+				#{offerBean.getReservedText(item)}
+			</h:panelGroup>
+			<h:panelGroup rendered="#{!offerBean.history}">
+				<h:panelGroup rendered="#{!offerslist.offerReserved}">
+					<h:panelGroup layout="block">Offer not reserved</h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{offerBean.offerReserved}">
+					<h:panelGroup
+						rendered="#{!offerBean.isAttractionReservedById(item.IDAtrakcjiUslugi)}">
+						<h:commandLink value="Reserve"
+							action="#{offerBean.reserveAttraction(item.IDAtrakcjiUslugi)}" />
+					</h:panelGroup>
+					<h:panelGroup styleClass="alreadyReserved"
+						rendered="#{offerBean.isAttractionReservedById(item.IDAtrakcjiUslugi)}">
+						<h:panelGroup layout="block">Already reserved</h:panelGroup>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:column>
+	</h:dataTable>
+</h:panelGroup>
+<h:panelGroup layout="block" rendered="#{!offerBean.history}"
+	styleClass="bottomContent">
+	<h:panelGroup rendered="#{loginForm.loggedOn}">
+		<h:panelGroup rendered="#{!offerslist.offerReserved}">
+			<h:commandButton styleClass="buttonElement" value="Reserve"
+				action="#{offerBean.reserve}"></h:commandButton>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{offerBean.offerReserved}">
+			<h:panelGroup layout="block">Offer is reserved.&nbsp;</h:panelGroup>
+		</h:panelGroup>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{loginForm.superUser}">
+		<h:commandLink value="Mark as realised" styleClass="buttonElement"
+			action="#{offerBean.markAsRealised}"></h:commandLink>
+	</h:panelGroup>
+</h:panelGroup>
+</html>

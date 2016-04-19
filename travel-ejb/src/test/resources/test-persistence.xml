@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="travelApp" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>java:jboss/datasources/travelTestDs</jta-data-source>
+    <class>net.travel.ejb.data.model.Tadresy</class>
+    <class>net.travel.ejb.data.model.Tatrakcjehistoria</class>
+    <class>net.travel.ejb.data.model.Tatrakcjeuslugi</class>
+    <class>net.travel.ejb.data.model.Tfirmy</class>
+    <class>net.travel.ejb.data.model.Thistoriaofert</class>
+    <class>net.travel.ejb.data.model.Tklienciatrakcje</class>
+    <class>net.travel.ejb.data.model.TklienciatrakcjePK</class>
+    <class>net.travel.ejb.data.model.Tklienciatrakcjehistoria</class>
+    <class>net.travel.ejb.data.model.TklienciatrakcjehistoriaPK</class>
+    <class>net.travel.ejb.data.model.Tkliencioferty</class>
+    <class>net.travel.ejb.data.model.TklienciofertyPK</class>
+    <class>net.travel.ejb.data.model.Tklienciofertyhistoria</class>
+    <class>net.travel.ejb.data.model.TklienciofertyhistoriaPK</class>
+    <class>net.travel.ejb.data.model.Tklient</class>
+    <class>net.travel.ejb.data.model.Toferta</class>
+    <class>net.travel.ejb.data.model.Tosoby</class>
+    <class>net.travel.ejb.data.model.Tpanstwa</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+    	<property name="eclipselink.deploy-on-startup" value="True" />
+    	<property name="eclipselink.weaving" value="static"/>
+		<!-- Password moved to server configuration file -->
+		<!-- <property name="eclipselink.jdbc.password" value="xxx"/>
+		<property name="eclipselink.jdbc.user" value="xxx"/>
+		<property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		<property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/traveltestdb"/>
+		<property name="eclipselink.logging.level" value="INFO"/>-->
+    </properties>
+  </persistence-unit>
+</persistence>

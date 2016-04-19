@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="content">
+		<h:panelGroup>
+			<h2>#{profileForm.profileTitle}</h2>
+			<h:panelGroup rendered="#{profileForm.userData != null}">
+				<h:panelGrid columns="2" columnClasses="titleColumn,userdataColumn">
+					<h:outputText for="email" value="#{bundle.Login_email}:" />
+					<h:inputText id="email" value="#{profileForm.userData.email}"
+						required="true" requiredMessage="E-mail is required">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</h:inputText>
+
+					<h:outputText for="name" value="#{bundle.SignUp_name}:" />
+					<h:inputText id="name" value="#{profileForm.userData.name}"
+						required="true" requiredMessage="Name is required" />
+
+					<h:outputText for="lastName" value="#{bundle.SignUp_lastName}:" />
+					<h:inputText id="lastName" value="#{profileForm.userData.lastName}"
+						required="true" requiredMessage="Last name is required" />
+
+					<h:outputText for="country" value="#{bundle.SignUp_country}:" />
+					<h:inputText id="country" value="#{profileForm.userData.country}"
+						validator="#{loginForm.validateCountry}" required="true"
+						requiredMessage="Country is required" />
+
+					<h:outputText for="address" value="#{bundle.SignUp_address}:" />
+					<h:inputText id="address" value="#{profileForm.userData.address}"
+						required="true" requiredMessage="Address is required" />
+
+					<h:outputText for="district" value="#{bundle.SignUp_district}:" />
+					<h:inputText id="district" value="#{profileForm.userData.district}"
+						required="true" requiredMessage="District is required" />
+
+					<h:outputText for="city" value="#{bundle.SignUp_city}:" />
+					<h:inputText id="city" value="#{profileForm.userData.city}"
+						required="true" requiredMessage="City is required" />
+
+					<h:outputText for="zipCode" value="#{bundle.SignUp_zipCode}:" />
+					<h:inputText id="zipCode" value="#{profileForm.userData.zipCode}"
+						required="true" requiredMessage="Zip code is required">
+						<f:validateRegex pattern="^[0-9][0-9-]+[0-9]$" />
+					</h:inputText>
+
+					<h:outputText for="phone" value="#{bundle.SignUp_phone}:" />
+					<h:inputText id="phone" value="#{profileForm.userData.phone}"
+						validator="#{loginForm.validatePhone}" />
+
+					<h:outputText for="fax" value="#{bundle.SignUp_fax}:" />
+					<h:inputText id="fax" value="#{profileForm.userData.fax}"
+						validator="#{loginForm.validateFax}" />
+
+					<h:outputText for="nip" value="#{bundle.SignUp_nip}:" />
+					<h:inputText id="nip" value="#{profileForm.userData.nip}"
+						validator="#{loginForm.validateNip}">
+					</h:inputText>
+
+				</h:panelGrid>
+				<h:panelGroup layout="block" styleClass="message">
+					<h:messages id="messages" globalOnly="false" />
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="bottomContent">
+					<h:commandButton styleClass="buttonElement" value="Submit"
+						action="#{profileForm.updateProfile}"></h:commandButton>
+					<h:button styleClass="buttonElement" value="Change password"
+						outcome="changePassword"></h:button>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+
+</html>

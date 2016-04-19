@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:panelGroup layout="block" rendered="#{!offerBean.hasOffers()}">
+	<br />
+	<br />
+	<span><b>Offer list is empty.</b></span>
+</h:panelGroup>
+
+<h:panelGroup layout="block" styleClass="offerGridPanel"
+	rendered="#{offerBean.hasOffers()}">
+	<h:dataTable value="#{offerBean.offers}" var="item" class="offersTable"
+		summary="Offer list" border="0" cellpadding="2" cellspacing="0"
+		rules="all" styleClass="offerTable">
+
+		<h:column
+			rendered="#{offerBean.renderReserved and loginForm.loggedOn}">
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Reserved}" />
+			</f:facet>
+			<h:selectBooleanCheckbox styleClass="reservedCheckBox"
+				disabled="true" value="#{offerBean.isOfferReserved(item)}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Offers_date}" />
+			</f:facet>
+			<h:outputText value="#{item.dataWyjazdu}">
+				<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+			</h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Offers_country}" />
+			</f:facet>
+			<h:outputText value="#{item.tpanstwa.nazwaPanstwa}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Offers_city}" />
+			</f:facet>
+			<h:outputText value="#{item.miasto}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Offers_attractionCount}" />
+			</f:facet>
+			<h:outputText value="#{offerBean.getAttractionCount(item)}" />
+		</h:column>
+		<!-- <h:column>
+					<f:facet name="header">
+						<h:outputText value="#{bundle.Offers_departurePlace}" />
+					</f:facet>
+					<h:outputText value="#{item.miejsceWyjazdu}" />
+				</h:column> -->
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Offers_dayCount}" />
+			</f:facet>
+			<h:outputText value="#{item.liczbaDniTrwania}">
+			</h:outputText>
+		</h:column>
+		<!-- <h:column>
+					<f:facet name="header">
+						<h:outputText value="#{bundle.Offers_personCount}" />
+					</f:facet>
+					<h:outputText value="#{item.ILiczbaOsob}" />
+				</h:column> -->
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Offers_price}" />
+			</f:facet>
+			<h:outputText value="#{item.MCena}">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.Offers_details}" />
+			</f:facet>
+			<h:commandLink action="#{offerBean.showDetails(item)}"
+				immediate="true" value="#{bundle.Offers_show}" />
+		</h:column>
+	</h:dataTable>
+	<h:panelGroup layout="block" styleClass="bottomCloseContent">
+		<h:outputText
+			value="#{offerBean.pageFirstItem + 1}..#{offerBean.pageLastItem}/#{offerBean.itemCount}" />&nbsp;
+				<h:commandLink action="#{offerBean.previous}"
+			value="#{bundle.Previous} #{offerBean.pageSize}" immediate="true"
+			rendered="#{offerBean.hasPreviousPage}" />&nbsp;
+				<h:commandLink action="#{offerBean.next}"
+			value="#{bundle.Next} #{offerBean.pageSize}" immediate="true"
+			rendered="#{offerBean.hasNextPage}" />&nbsp;
+	</h:panelGroup>
+</h:panelGroup>
+</html>

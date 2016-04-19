@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="./resources/css/default.css" rel="stylesheet"
+		type="text/css" />
+	<link href="./resources/css/default.css" rel="stylesheet"
+		type="text/css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" />
+	<script type="text/javascript" src="./resources/js/offers.js" />
+	<title>Travel Agency</title>
+</h:head>
+
+<h:body>
+	<h:panelGroup layout="block" id="mainDiv">
+
+		<h:panelGroup layout="block" class="headerDiv">
+			<h1 class="headerText">Joka - Travel Agency</h1>
+		</h:panelGroup>
+		<h:form>
+
+			<h:panelGroup layout="block" class="loggedSection">
+				<h:panelGroup rendered="#{loginForm.loggedOn}">
+					<h:outputLabel value="Logged uesr: "></h:outputLabel>
+					<h:outputLabel value="#{loginForm.userName}"></h:outputLabel>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="clearfix">
+				<h:panelGroup layout="block" styleClass="contentFrame menuContent">
+					<h:panelGrid columns="1">
+						<h:panelGroup rendered="#{loginForm.loggedOn}">
+							<h:commandLink value="Log out" action="#{loginForm.logOut}"
+								immediate="true" styleClass="mainButton"></h:commandLink>
+							<br />
+							<h:link value="Edit profile" outcome="editProfile"
+								styleClass="mainButton"></h:link>
+							<br />
+						</h:panelGroup>
+						<h:panelGroup rendered="#{!loginForm.loggedOn}">
+							<h:link outcome="login" styleClass="mainButton" value="Sign in"></h:link>
+							<br />
+						</h:panelGroup>
+						<h:link outcome="offers" styleClass="mainButton" value="Offers"></h:link>
+						<h:panelGroup rendered="#{loginForm.loggedOn}">
+							<h:link outcome="offersHistory" styleClass="mainButton"
+								value="Offer History"></h:link>
+						</h:panelGroup>
+					</h:panelGrid>
+				</h:panelGroup>
+				<h:panelGroup layout="block"
+					styleClass="contentFrame mainContent clearfix">
+					<h:panelGroup layout="block" styleClass="contentPanel">
+						<h:panelGroup>
+							<ui:insert name="content">Content</ui:insert>
+						</h:panelGroup>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</h:panelGroup>
+</h:body>
+
+</html>

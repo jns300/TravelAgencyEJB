@@ -36,7 +36,7 @@
 <h:panelGroup rendered="#{offerBean.attractions.size() > 0}">
 	<h3>Attractions related to the offer</h3>
 	<h:dataTable var="item" rules="all" value="#{offerBean.attractions}"
-		class="attractionTable">
+		class="attractionTable dataTable">
 		<h:column>
 			<f:facet name="header">
 				<h:outputText value="#{bundle.Attraction_name}" />

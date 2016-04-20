@@ -15,7 +15,7 @@
 	rendered="#{offerBean.hasOffers()}">
 	<h:dataTable value="#{offerBean.offers}" var="item" class="offersTable"
 		summary="Offer list" border="0" cellpadding="2" cellspacing="0"
-		rules="all" styleClass="offerTable">
+		rules="all" styleClass="offerTable dataTable">
 
 		<h:column
 			rendered="#{offerBean.renderReserved and loginForm.loggedOn}">

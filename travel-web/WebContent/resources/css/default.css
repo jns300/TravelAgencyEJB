@@ -69,6 +69,10 @@ h1.contentTitle {
 	padding-bottom: 12px;
 }
 
+.dataTable {
+	width: 100%;
+}
+
 .menuContent {
 	margin-top: 15px;
 	width: 20%;

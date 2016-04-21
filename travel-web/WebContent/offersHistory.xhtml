@@ -9,8 +9,13 @@
 	<ui:define name="content">
 		<h:panelGroup layout="block">
 			<h3>#{bundle.Offers_listHistoryTitle}</h3>
+			<ui:include src="offerPageSize.xhtml">
+				<ui:param name="offerBean" value="#{offerHistoryList}" />
+			</ui:include>
+			<ui:include src="offerFilteringButtons.xhtml">
+				<ui:param name="offerBean" value="#{offerHistoryList}" />
+			</ui:include>
 			<ui:include src="offerGrid.xhtml">
-				<ui:param name="history" value="true" />
 				<ui:param name="offerBean" value="#{offerHistoryList}" />
 			</ui:include>
 		</h:panelGroup>

@@ -94,7 +94,7 @@ public class RequestBean implements RequestBeanRemote {
 		cq.where(cb.equal(client.get(Tklienciofertyhistoria_.IDKlienta), clientId));
 		cq.orderBy(cb.asc(offer.get(Thistoriaofert_.dataWyjazdu)), cb.asc(offer.get(Thistoriaofert_.tpanstwa)));
 		javax.persistence.Query q = em.createQuery(cq);
-		q.setMaxResults(end - start + 1);
+		q.setMaxResults(end - start);
 		q.setFirstResult(start);
 		return q.getResultList();
 	}
@@ -115,7 +115,7 @@ public class RequestBean implements RequestBeanRemote {
 				expiredOnly);
 		cq.orderBy(cb.asc(offer.get(Toferta_.dataWyjazdu)), cb.asc(offer.get(Toferta_.tpanstwa)));
 		javax.persistence.Query q = em.createQuery(cq);
-		q.setMaxResults(end - start + 1);
+		q.setMaxResults(end - start);
 		q.setFirstResult(start);
 		return q.getResultList();
 

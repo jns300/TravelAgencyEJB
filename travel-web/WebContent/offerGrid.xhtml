@@ -89,12 +89,19 @@
 	<h:panelGroup layout="block" styleClass="bottomCloseContent">
 		<h:outputText
 			value="#{offerBean.pageFirstItem + 1}..#{offerBean.pageLastItem}/#{offerBean.itemCount}" />&nbsp;
-				<h:commandLink action="#{offerBean.previous}"
+			<h:commandLink action="#{offerBean.firstPage}"
+			styleClass="navigationLink" value="#{bundle.First}" immediate="true"
+			rendered="#{offerBean.hasPreviousPage}" />
+		<h:commandLink action="#{offerBean.previous}"
+			styleClass="navigationLink"
 			value="#{bundle.Previous} #{offerBean.pageSize}" immediate="true"
-			rendered="#{offerBean.hasPreviousPage}" />&nbsp;
-				<h:commandLink action="#{offerBean.next}"
+			rendered="#{offerBean.hasPreviousPage}" />
+		<h:commandLink action="#{offerBean.next}" styleClass="navigationLink"
 			value="#{bundle.Next} #{offerBean.pageSize}" immediate="true"
-			rendered="#{offerBean.hasNextPage}" />&nbsp;
+			rendered="#{offerBean.hasNextPage}" />
+		<h:commandLink action="#{offerBean.lastPage}"
+			styleClass="navigationLink" value="#{bundle.Last}" immediate="true"
+			rendered="#{offerBean.hasNextPage}" />
 	</h:panelGroup>
 </h:panelGroup>
 </html>

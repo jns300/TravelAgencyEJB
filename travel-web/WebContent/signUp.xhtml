@@ -9,7 +9,7 @@
 	<ui:define name="content">
 		<h:panelGroup>
 			<h2>#{bundle.SignUp_title}</h2>
-			<h:panelGrid columns="2" columnClasses="titleColumn,userdataColumn">
+			<h:panelGrid columns="2" columnClasses="titleColumn,dataColumn">
 				<h:outputText for="email" value="#{bundle.Login_email}:" />
 				<h:inputText id="email" value="#{loginForm.userData.email}"
 					required="true" requiredMessage="E-mail is required">

@@ -26,6 +26,8 @@ import net.travel.ejb.data.model.Toferta;
 public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 		implements Serializable {
 
+	private static final String VIEW_ID = "offers";
+
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger logger = Logger.getLogger(OffersBean.class.getName());
@@ -74,6 +76,7 @@ public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 
 	public void setShowExpired(boolean value) {
 		showExpired = value;
+		clearOfferCache();
 	}
 
 	public boolean getShowExpired() {
@@ -93,7 +96,7 @@ public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 		}
 		return allOfferCount;
 	}
-
+	
 	public String reset() {
 		setMinDurationValue(null);
 		setMaxDurationValue(null);
@@ -102,8 +105,8 @@ public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 		setDepartureStartDate(null);
 		setDepartureEndDate(null);
 		setCountryValue(null);
-		// return current page name to show if with reset data
-		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
+		setShowExpired(false);
+		return super.reset();
 	}
 
 	protected String getOfferDetailsPage() {
@@ -160,7 +163,7 @@ public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 			request.markAsRealised(getCurrent().getIDOferty());
 			clearOfferCache();
 		}
-		return "offers";
+		return VIEW_ID;
 	}
 
 	// / BEGIN properties for the search criteria

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 
 import net.travel.ejb.request.RequestBeanRemote;
@@ -34,15 +35,24 @@ public abstract class AbstractOffersBean<T, TA> implements Serializable {
 
 	private transient T current;
 
+	public int getPageSize() {
+		return pageSize;
+	}
+
 	public void setPageSize(int value) {
-		clearOfferCache();
 		pageSize = value;
+		clearOfferCache();
 	}
 
 	protected void clearOfferCache() {
 		// nothing to do
 		offersModel = null;
 		allOfferCount = -1;
+	}
+
+	protected void resetStartPage() {
+		startPage = 0;
+		clearOfferCache();
 	}
 
 	public int getPageFirstItem() {
@@ -58,13 +68,17 @@ public abstract class AbstractOffersBean<T, TA> implements Serializable {
 	}
 
 	public boolean getHasNextPage() {
-		return getPageLastItem() + 1 < getItemCount();
+		return getPageLastItem() < getItemCount();
 	}
 
 	protected abstract int getItemCount();
 
-	public int getPageSize() {
-		return pageSize;
+	public String firstPage() {
+		if (getHasPreviousPage()) {
+			startPage = 0;
+			clearOfferCache();
+		}
+		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
 	}
 
 	public String previous() {
@@ -72,7 +86,7 @@ public abstract class AbstractOffersBean<T, TA> implements Serializable {
 			startPage = Math.max(0, startPage - pageSize);
 			clearOfferCache();
 		}
-		return "offers";
+		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
 	}
 
 	public String next() {
@@ -80,7 +94,33 @@ public abstract class AbstractOffersBean<T, TA> implements Serializable {
 			startPage = Math.min(getItemCount(), startPage + pageSize);
 			clearOfferCache();
 		}
-		return "offers";
+		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
+	}
+
+	public String lastPage() {
+		if (getHasNextPage()) {
+			int count = getItemCount();
+			int lastStart = count - count % pageSize;
+			if (lastStart == count) {
+				lastStart = count - pageSize;
+			}
+			startPage = lastStart;
+			clearOfferCache();
+		}
+		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
+	}
+
+	public String reload() {
+		resetStartPage();
+		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
+	}
+
+	public String reset() {
+		resetStartPage();
+		if (pageSize < 1) {
+			setPageSize(PAGE_SIZE);
+		}
+		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
 	}
 
 	public T getCurrent() {

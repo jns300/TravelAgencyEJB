@@ -10,8 +10,8 @@
 		<h:panelGroup layout="block">
 			<h3>#{bundle.Offers_listTitle}</h3>
 			<h:messages styleClass="messages" />
-			<h:panelGroup>
-				<h:panelGrid columns="4"
+			<h:panelGroup layout="block">
+				<h:panelGrid columns="4" styleClass="wideTable"
 					columnClasses="nameColumn,valueColumn,nameColumn,valueColumn">
 					<h:outputLabel for="departureStartDate"
 						value="Departure start date  (yyyy-MM-dd): "></h:outputLabel>
@@ -51,27 +51,22 @@
 						value="#{offerslist.countryValue}"></h:inputText>
 				</h:panelGrid>
 				<br />
-				<h:panelGrid columns="1">
-					<h:panelGroup layout="block">
-						<h:outputLabel for="itemsOnPage"
-							value="Number of items on the page: "></h:outputLabel>
-						<h:inputText id="itemsOnPage" label="Number of items on the page"
-							value="#{offerslist.pageSize}"></h:inputText>
-					</h:panelGroup>
-					<h:panelGroup rendered="#{loginForm.superUser}">
+				<ui:include src="offerPageSize.xhtml">
+					<ui:param name="offerBean" value="#{offerslist}" />
+				</ui:include>
+				<h:panelGroup rendered="#{loginForm.superUser}">
+					<h:panelGrid columns="2" columnClasses="nameColumn,valueColumn">
 						<h:outputLabel for="showExpired"
 							value="Show only expired offers: "></h:outputLabel>
 						<h:selectBooleanCheckbox id="showExpired"
 							value="#{offerslist.showExpired}"></h:selectBooleanCheckbox>
-					</h:panelGroup>
-				</h:panelGrid>
-				<h:commandButton styleClass="buttonElement" id="showButton"
-					value="Reload" action="offers"></h:commandButton>
-				<h:commandButton styleClass="buttonElement" id="resetButton"
-					value="Reset" action="#{offerslist.reset}" immediate="true"></h:commandButton>
+					</h:panelGrid>
+				</h:panelGroup>
+				<ui:include src="offerFilteringButtons.xhtml">
+					<ui:param name="offerBean" value="#{offerslist}" />
+				</ui:include>
 			</h:panelGroup>
 			<ui:include src="offerGrid.xhtml">
-				<ui:param name="history" value="false" />
 				<ui:param name="offerBean" value="#{offerslist}" />
 			</ui:include>
 		</h:panelGroup>

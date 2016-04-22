@@ -51,6 +51,10 @@ h1.contentTitle {
 	padding-right: 3px;
 }
 
+.valueColumn input{
+	width: 85pt;
+}
+
 .titleColumn {
 	background-color: #A1A1A1;
 	font-weight: bold;

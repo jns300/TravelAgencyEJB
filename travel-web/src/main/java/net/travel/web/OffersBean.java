@@ -9,10 +9,8 @@ import java.util.logging.Logger;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.faces.view.facelets.FaceletContext;
 
 import net.travel.ejb.data.model.Tatrakcjeuslugi;
 import net.travel.ejb.data.model.Toferta;
@@ -52,26 +50,13 @@ public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 	}
 
 	public DataModel<?> getOffers() {
-		boolean useHistory = getUseHistory();
-		if (!useHistory) {
-			if (offersModel == null) {
-				offersModel = new ListDataModel<Toferta>(request.getOffers(startPage,
-						startPage + pageSize, getMinDurationValue(), getMaxDurationValue(),
-						getMinPriceValue(), getMaxPriceValue(), getCountryValue(),
-						getDepartureStartDate(), getDepartureEndDate(), showExpired));
-			}
+		if (offersModel == null) {
+			offersModel = new ListDataModel<Toferta>(request.getOffers(startPage,
+					startPage + pageSize, getMinDurationValue(), getMaxDurationValue(),
+					getMinPriceValue(), getMaxPriceValue(), getCountryValue(),
+					getDepartureStartDate(), getDepartureEndDate(), showExpired));
 		}
 		return offersModel;
-	}
-
-	private boolean getUseHistory() {
-		FaceletContext faceletContext = (FaceletContext) FacesContext.getCurrentInstance()
-				.getAttributes().get(FaceletContext.FACELET_CONTEXT_KEY);
-		String useHistory = null;
-		if (faceletContext != null) {
-			useHistory = (String) faceletContext.getAttribute("history");
-		}
-		return useHistory != null && useHistory.equals("true");
 	}
 
 	public void setShowExpired(boolean value) {
@@ -96,7 +81,7 @@ public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 		}
 		return allOfferCount;
 	}
-	
+
 	public String reset() {
 		setMinDurationValue(null);
 		setMaxDurationValue(null);
@@ -162,6 +147,11 @@ public class OffersBean extends AbstractOffersBean<Toferta, Tatrakcjeuslugi>
 		if (clientId != null) {
 			request.markAsRealised(getCurrent().getIDOferty());
 			clearOfferCache();
+			DataModel<?> offerList = getOffers();
+			if (offerList.getRowCount() == 0) {
+				startPage = Math.max(0, startPage - pageSize);
+				clearOfferCache();
+			}
 		}
 		return VIEW_ID;
 	}

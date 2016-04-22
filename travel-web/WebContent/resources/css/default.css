@@ -51,8 +51,11 @@ h1.contentTitle {
 	padding-right: 3px;
 }
 
-.valueColumn input{
+.valueColumn input {
 	width: 85pt;
+}
+.valueColumn input[type=checkbox] {
+	width: auto;
 }
 
 .titleColumn {
